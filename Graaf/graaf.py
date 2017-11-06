@@ -6,7 +6,9 @@ import csv
 stations = []
 with open ('stations.csv ') as csvfile:
     reader = csv.DictReader(csvfile)
+    b = 0
     for row in reader:
+        b = b+1
         stations.append(row)
         
 
@@ -14,10 +16,15 @@ with open ('stations.csv ') as csvfile:
 verbindingen = []
 with open('verbindingen.csv') as csvfile:
     reader = csv.DictReader(csvfile)
+    a = 0
     for row in reader:
+        a = a+1
         verbindingen.append(row)
 
-# Prints the station and the connection with the time.        
-print(stations[0]['Station'])        
-print(verbindingen[0]['Station1'], verbindingen[0]['Station2'], verbindingen[0]['Tijd'])
+# Prints the station and the connection with the time. 
+for i in range (b):       
+    print(stations[i]['Station']) 
+
+for i in range (a):      
+    print(verbindingen[i]['Station1'], verbindingen[i]['Station2'], verbindingen[i]['Tijd'])
  
