@@ -1,6 +1,6 @@
 import csv
 
-
+alle_sporen = []
 
 # Makes a list with all the stations, x/y cordianates and if it is a critical station.
 stations = []
@@ -21,10 +21,47 @@ with open('verbindingen.csv') as csvfile:
         a = a+1
         verbindingen.append(row)
 
-# Prints the station and the connection with the time. 
-for i in range (b):       
-    print(stations[i]['Station']) 
 
-for i in range (a):      
-    print(verbindingen[i]['Station1'], verbindingen[i]['Station2'], verbindingen[i]['Tijd'])
+# Prints the station and the connection with the time. 
+
+
+for i in range (b):  
+   
+    sporen = [] 
+    for z in range (a):
+
+        if stations[i]['Station'] == verbindingen[z]['Station1']:
+    
+            #print stations[i]['Station'], verbindingen[z]['Station2']
+            
+            sporen.append(verbindingen[z]['Station2'])
+            #print sporen
+            
+    alle_sporen.append(sporen)
+
+
+
+
+dict = {}
+
+for i in range (b):
+    b = {}
+    x= stations[i]['Station']
+    g=alle_sporen[i]
+    b = {x:g}
+    dict.update(b)
+
+print dict
+
+
+    
  
+ 
+ 
+ 
+ 
+
+
+ 
+
+    
