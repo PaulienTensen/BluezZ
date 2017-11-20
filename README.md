@@ -30,11 +30,12 @@ python graaf.py
 
 ### Toetsingsgrootheid
 
-De toetsingsgrootheid van deze case is (n-1)! / 2. Waarbij n het aantal stations zijn. 
+De toetsingsgrootheid van deze case is (n-1)! / 2. Waarbij n het aantal stations zijn en n >=3. 
 
 ### Algoritmes
 
-In deze case is gebruik gemaakt van verschillende algoritmes. 
+In deze case wordt gebruik gemaakt van een ongerichte graaf. Aangezien je heen en weer kunt tussen knopen(stations).
+
 
 
 
