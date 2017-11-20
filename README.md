@@ -20,11 +20,11 @@ Zorg dat de bijbehorende csv bestanden: ConnectiesHolland.csv, StationsHolland.c
 
 Deze case is gemaakt met behulp van Python 3.0
 
-## Toetsingsgrootheid
+### Toetsingsgrootheid
 
 De toetsingsgrootheid van deze case is (n-1)! / 2. Waarbij n het aantal stations zijn. 
 
-## Algoritmes
+### Algoritmes
 
 ## Auteurs
 Paulien Tensen, Matia Caso & Thomas van Dooren. 
