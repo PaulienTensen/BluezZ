@@ -57,40 +57,76 @@ for i in range (b):
     b = {x:g}
     graph.update(b)
     
-print graph['Haarlem'][1][0]
 
 
 
-def make_traject(graph, start, end, path =[]):
-    path = path + graph[start]
-    if start == end:
-        return [path]
-    if not graph.has_key(start):
-        return None
+
+def make_traject(graph, start, MAX =120, count = None, path = []):
     
-    
-    
-    print ("Start:")
     print path
-    print("End:")
-    print end
+    
+    
+    path = path + [start]
+    
 
-x = make_traject(graph, 'Beverwijk', 'Amsterdam Amstel')	
+    
+    cursor = graph[start]
+    
+    if not graph.has_key(start):
+        return []
+    
+    best_choice = cursor[0][1]
 
-#def find_shortest_path(graph, start, end, path=[]):
-   #     path = path + [start]
-      #  if start == end:
-     #   return path
-     #   if not graph.has_key(start):
-        #    return None
-        #shortest = None
-        #for node in graph[start]:
-           # if node not in path:
-              #  newpath = find_shortest_path(graph, node, end, path)
-                #if newpath:
-                   # if not shortest or len(newpath) < len(shortest):
-                      #  shortest = newpath
-        #return shortest	
+    best_choice = map(int, best_choice)
+    
+    
+    
+    if ''.join(cursor[0][0]) in path:
+        best_choice = cursor[1][1]
+        best_choice = map(int, best_choice)
+ 
+    
+    for row in cursor:
+        
+
+        if ''.join(row[0]) not in path:
+            
+            time_row = map(int,row[1])
+               
+            if time_row <= best_choice:        
+                
+                best_choice = time_row
+                best_row = ''.join(row[0])
+                
+
+
+    
+    best_choice = best_choice[0]
+    print "type ", type(best_choice)
+    print "best choice = ", best_choice
+    #count = count[0] 
+    
+    print "type2 ", type(count)
+    print count
+    
+    #count = count + best_choice
+    print "count now is = ", count
+    
+    #MAX= MAX[0]
+    
+    
+    
+    if count > MAX:
+        
+        return [path] 
+    
+    else:
+        newpath = make_traject(graph, best_row, 120, count, path)
+   
+    
+print make_traject(graph, 'Haarlem',count=0)	
+
+
 		
     
     
