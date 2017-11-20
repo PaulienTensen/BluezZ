@@ -61,70 +61,104 @@ for i in range (b):
 
 
 
-def make_traject(graph, start, MAX =120, count = None, path = []):
-    
-    print path
-    
+def make_traject(graph, start, MAX =120, count  = None, path = []):
     
     path = path + [start]
-    
-
-    
     cursor = graph[start]
     
     if not graph.has_key(start):
         return []
     
     best_choice = cursor[0][1]
-
     best_choice = map(int, best_choice)
     
-    
-    
-    if ''.join(cursor[0][0]) in path:
-        best_choice = cursor[1][1]
-        best_choice = map(int, best_choice)
- 
+    integ = 0
+
+    while (''.join(cursor[integ][0])) in path:
+
+       
+        integ = integ + 1
+        
+        if integ == len(cursor):
+            
+            for row in cursor:
+                    
+                
+                    
+                time_row = map(int,row[1])
+                
+                
+                if time_row <= best_choice:        
+                    
+                    
+                    
+                    best_choice = time_row
+                    best_row = ''.join(row[0])
+                    
+                    
+
+            best_choice = best_choice[0]  
+            
+            
+            
+            count += best_choice
+            
+
+            if count > MAX:
+                
+                count -= best_choice
+               
+                print path
+                print count
+                
+                return path
+                return count
+                
+
+            else:
+                
+                newpath = make_traject(graph, best_row, 120, count, path)
+            
+        else:
+   
+            best_choice = cursor[integ][1]
+            
+            best_choice = map(int, best_choice)
+
     
     for row in cursor:
         
-
         if ''.join(row[0]) not in path:
             
-            time_row = map(int,row[1])
-               
+            time_row = map(int,row[1])    
             if time_row <= best_choice:        
                 
                 best_choice = time_row
                 best_row = ''.join(row[0])
                 
+    
+    best_choice = best_choice[0]  
+    count += best_choice
 
-
-    
-    best_choice = best_choice[0]
-    print "type ", type(best_choice)
-    print "best choice = ", best_choice
-    #count = count[0] 
-    
-    print "type2 ", type(count)
-    print count
-    
-    #count = count + best_choice
-    print "count now is = ", count
-    
-    #MAX= MAX[0]
-    
-    
     
     if count > MAX:
         
-        return [path] 
+        count -= best_choice
+        print path
+        print count
+        
+        return path
+        return count
     
     else:
         newpath = make_traject(graph, best_row, 120, count, path)
    
-    
-print make_traject(graph, 'Haarlem',count=0)	
+
+make_traject(graph, 'Amsterdam Centraal',count=0)
+
+
+
+
 
 
 		
