@@ -3,4 +3,4 @@ De map Graaf bevat de volgende bestanden:
 2. csv file met bijbehorende stations voor Holland
 3. graaf.py 
 
-Om graaf.py te runnen, typ het volgende in je terminal: python graaf.py
+Om graaf.py te runnen: python graaf.py
