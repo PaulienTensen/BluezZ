@@ -20,7 +20,7 @@ Zorg dat de bijbehorende csv bestanden: ConnectiesHolland.csv, StationsHolland.c
 
 Deze case is gemaakt met behulp van Python 3.0
 
-#### Runnen
+#### Runnen:
 python graaf.py
 
 ### Toetsingsgrootheid
