@@ -21,12 +21,13 @@ constrains:
 
 Zorg dat de bijbehorende csv bestanden: ConnectiesHolland.csv, StationsHolland.csv voor Holland in dezelfde map staan als het bijbehorende python bestand. 
 
-### Instaleren
+### Installeren
 
 Deze case is gemaakt met behulp van Python 3.0
 
 #### Runnen:
 python graaf.py
+python matrix.py
 
 ### Toetsingsgrootheid
 
