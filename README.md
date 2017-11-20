@@ -32,6 +32,15 @@ python graaf.py
 
 De toetsingsgrootheid van deze case is (n-1)! / 2. Waarbij n het aantal stations zijn en n >=3. 
 
+### Probleem type
+constrained optimalization problem (COP). Hierbij moet een zo goed mogelijke oplossing worden gevonden. 
+De bijbehorende toetsingsgrootheid is (n-1)! / 2
+
+Grootte statespace: 
+upperbound: hoogstens n keer de grootste afstanden. 
+
+
+
 ### Algoritmes
 
 In deze case wordt gebruik gemaakt van een ongerichte graaf. Aangezien je heen en weer kunt tussen knopen(stations).
