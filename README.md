@@ -26,6 +26,11 @@ De toetsingsgrootheid van deze case is (n-1)! / 2. Waarbij n het aantal stations
 
 ### Algoritmes
 
+In deze case is gebruik gemaakt van verschillende algoritmes. 
+
+
+
+
 ## Auteurs
 Paulien Tensen, Matia Caso & Thomas van Dooren. 
 
