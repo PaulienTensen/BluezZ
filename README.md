@@ -12,6 +12,11 @@ De volgende score functie werd meegegeven bij de case voor de kwaliteit van de l
 s = p*10000 - (t*20 + min/100000)
 Waarin S de score is, p het percentage van de bereden kritieke verbindingen, t het aantal treinen en m het totaal door alle treinen samen gereden aantal minuten in de lijnvoering. 
 
+constrains:
+1. Running time van trajecten: maximaal 2 uur. 
+2. Alle stations moeten bereden worden binnen de 2 uur. 
+3. Maximaal aantal trajecten: 7. 
+
 ### Voorwaarden
 
 Zorg dat de bijbehorende csv bestanden: ConnectiesHolland.csv, StationsHolland.csv voor Holland in dezelfde map staan als het bijbehorende python bestand. 
