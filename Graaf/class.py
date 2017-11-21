@@ -58,7 +58,7 @@ for i in range (b):
     graph.update(b)
     
 
-    
+  
     
     
     
@@ -127,9 +127,22 @@ class Trein(object):
     def verminderen(self, laatste_verbinding):
         self.tijdsduur -= laatste_verbinding[1] 
         
-        
+
         
 
+
+# AUTOMATISEREN: AKA NIET ZELF NAMEN ERIN MOETEN TE DOEN!!::  
+# MISSCHIEN OP DEZE MANIER, MAAR BETER KIJKEN NAAR DE LISTS:::::::
+# namen = ["ravi", "mat", "cees"]
+
+# for i in range(len(namen)):
+#    x = namen[i]
+#   d = "hallo"
+#   z = {x:d}
+#    print z
+            
+        
+START3 = ["Delft"]
 START = ["Den Helder"]   
 START2 = ["Rotterdam Alexander"] 
         
@@ -143,12 +156,14 @@ trajectbram = START2
 bram = Trein(trajectbram, START2, ["Rotterdam Alexander"], 0)
 
 
+trajectravi = START3
+ravi = Trein(trajectravi, START3, ["Delft"], 0)
 
 
 
-
-
-
+# ZOEKEN NAAR BEGINPUNTEN (UITHOEKEN) MISSCHIEN 
+# AAN DE HAND VAN EEN LOOP MET DAARIN DE VOLGENDE FUNCTIE:::
+#print len(graph["Dordrecht"])
 
 
 
@@ -200,7 +215,26 @@ if bram.tijdsduur > 120:
     lengte = len(bram.traject) - 1
     bram.actuele_station(bram.traject[lengte]) 
     
-    
+
+ 
+# While loop gaat door tot traject is kleiner of gelijk dan 120.
+while (ravi.tijdsduur <= 120):
+
+    # Beste optie kiezen aan de hand van de mogelijkheden.
+    beste_optie = ravi.opties(ravi.eindstation[0])
+    # Trein verplaatsen naar volgend spoor.
+    ravi.volgend_spoor(beste_optie[0])
+    # Huiding station updaten.
+    ravi.actuele_station(beste_optie[0])
+    # Tijd updaten.
+    ravi.tijd(beste_optie[1])
+
+#Al is het traject hoger betekent dat er 1 loop te veel gedaan is, dus die moet eraf gehaald worden.
+if ravi.tijdsduur > 120:
+    ravi.verminderen(beste_optie)
+    ravi.pop()
+    lengte = len(ravi.traject) - 1
+    ravi.actuele_station(ravi.traject[lengte])     
 
     
     
@@ -237,6 +271,15 @@ print "traject: ", bram.traject
 print "tijdsduur: ", bram.tijdsduur
 print "Beginstation: ", bram.beginstation
 print "Eindstation: ", bram.eindstation
+print
+print
+print
+print "RAVI: :"
+print
+print "traject: ", ravi.traject
+print "tijdsduur: ", ravi.tijdsduur
+print "Beginstation: ", ravi.beginstation
+print "Eindstation: ", ravi.eindstation
 
 
 
