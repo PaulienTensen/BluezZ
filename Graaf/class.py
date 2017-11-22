@@ -10,7 +10,7 @@ with open ('stations.csv ') as csvfile:
     for row in reader:
         b = b+1
         stations.append(row)
-        
+       
 
 # Makes a list with all the connection and the time.
 verbindingen = []
@@ -47,38 +47,35 @@ for i in range (b):
    
     alle_sporen.append(sporen)
 
+    
+    
 graph = {}
 
 # Makes the graph
 for i in range (b):
-    b = {}
+    y = {}
     x= stations[i]['Station']
     g=alle_sporen[i]
-    b = {x:g}
-    graph.update(b)
+    y = {x:g}
+    graph.update(y)
+
+
     
+    
+    
+# ZOEKEN NAAR DE UITHOEKEN VAN DE KAART    
+uithoeken =[] 
+geen_uithoek = 2   
+
+for i in range (b):
+    x = stations[i]['Station']
+    connecties = len(graph[x])
+
+    if connecties < geen_uithoek:
+        uithoeken.append(x)
+         
 
   
-    
-    
-    
-    
-    
-    
-    
-      
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 # Trein class aanmaken.    
 class Trein(object):
@@ -101,23 +98,106 @@ class Trein(object):
     def tijd(self, tijd):
         self.tijdsduur += tijd
         
+        
+        
+        
+        
+        
+        
+        
+        
 
     # De verbinding met de kortste tijd kiezen.
     # Hier worden alle beslissingen gemaakt kwa welk spoor te nemen
     # Hier moeten dus de restraints aangepast worden!
     def opties(self, huidig_station):
+       
         richtingen = graph[huidig_station]
-        best_time = 10000
+        stations_niet_aangetikt = []
+        stations_wel_aangetikt = []
+        twee_stappen_terug = []
+        terugweg = []
         
+        
+        
+        
+        
+        # INDELEN
         for row in richtingen:
-            if row[0][0] not in self.traject:
-                tijd = int(row[1][0])
-                if tijd <= best_time:
-                    best_time = tijd
-                    best_station = row[0][0]
 
-        return best_station, best_time
-    
+            
+        
+            if row[0][0] not in self.traject:
+                stations_niet_aangetikt.append(row)
+            elif row[0][0] == thomas.traject[-2]:
+                terugweg.append(row)
+            elif row[0][0] == thomas.traject[-3]:
+                twee_stappen_terug.append(row)
+            else:
+                stations_wel_aangetikt.append(row)
+        
+        
+        # WERKT NOG NIET, LEGE APPENDS, MAAR HOEZO???????
+        print twee_stappen_terug
+        
+        
+        
+        #ISGOED!!:: NIET AANGETIKT :: KORSTE VERBINDING
+        if not stations_niet_aangetikt == []:
+            beste_tijd = 1000
+            for row in stations_niet_aangetikt: 
+                if int(row[1][0]) <= beste_tijd:
+                    beste_tijd = int(row[1][0])
+                    beste_station = row[0][0] 
+            
+           
+
+           # IDEE OM BIJ TE HOUDEN OF WE ALLE STATIONS HEBBEN GEHAD??
+           #if row[0][0] not in self.traject:
+                #print row[0][0]
+            return beste_station, beste_tijd
+
+           
+        # ALS ALLE SPOREN ZIJN BEREDEN, KIES NIET DE TERUGWEG.
+        # WEL KORTSTE ROUTE VAN DE BEREDEN SPOREN
+        
+       
+        elif not stations_wel_aangetikt == []: 
+
+            for row in stations_wel_aangetikt:
+
+                beste_tijd = 1000
+                
+                if int(row[1][0]) <= beste_tijd:
+                    beste_tijd = int(row[1][0])
+                    beste_station = row [0][0]
+            
+            # IDEE OM BIJ TE HOUDEN OF WE ALLE STATIONS HEBBEN GEHAD??
+            #if row[0][0] not in self.traject:
+              #  print row[0][0]
+                
+                
+            return beste_station, beste_tijd
+          
+          
+        elif not twee_stappen_terug == []:
+            
+            beste_station = row[0][0]
+            beste_tijd =  int(row[1][0])
+            
+            return beste_station, beste_tijd
+            
+          
+        # ALS TERUG ENIGE OPTIE IS GA TERUG
+        else: 
+            beste_station = row[0][0]
+            beste_tijd =  int(row[1][0])
+            return beste_station, beste_tijd
+                    
+                
+                
+                
+
     
 
     def pop(self):
@@ -133,44 +213,18 @@ class Trein(object):
 
 # AUTOMATISEREN: AKA NIET ZELF NAMEN ERIN MOETEN TE DOEN!!::  
 # MISSCHIEN OP DEZE MANIER, MAAR BETER KIJKEN NAAR DE LISTS:::::::
-# namen = ["ravi", "mat", "cees"]
 
-# for i in range(len(namen)):
-#    x = namen[i]
-#   d = "hallo"
-#   z = {x:d}
-#    print z
-            
-        
-START3 = ["Delft"]
-START = ["Den Helder"]   
-START2 = ["Rotterdam Alexander"] 
-        
+
+START = ['Amsterdam Centraal']   
+      
 # Trein initialiseren (beginpunt kiezen & tijd op nul zetten).        
-trajectthomas = START   
-thomas = Trein(trajectthomas, START, ["Den Helder"], 0)    
-
-
-
-trajectbram = START2
-bram = Trein(trajectbram, START2, ["Rotterdam Alexander"], 0)
-
-
-trajectravi = START3
-ravi = Trein(trajectravi, START3, ["Delft"], 0)
-
-
-
-# ZOEKEN NAAR BEGINPUNTEN (UITHOEKEN) MISSCHIEN 
-# AAN DE HAND VAN EEN LOOP MET DAARIN DE VOLGENDE FUNCTIE:::
-#print len(graph["Dordrecht"])
-
-
+thomas = Trein(START, START, ['Amsterdam Centraal'], 0)    
 
 
 
 # While loop gaat door tot traject is kleiner of gelijk dan 120.
-while (thomas.tijdsduur <= 120):
+while (thomas.tijdsduur < 800):
+
 
     # Beste optie kiezen aan de hand van de mogelijkheden.
     beste_optie = thomas.opties(thomas.eindstation[0])
@@ -180,152 +234,42 @@ while (thomas.tijdsduur <= 120):
     thomas.actuele_station(beste_optie[0])
     # Tijd updaten.
     thomas.tijd(beste_optie[1])
+    
+    #print thomas.traject
+  
 
+
+
+
+
+
+
+
+
+
+
+
+
+  
+# NIET VERWIJDEREN, BELANGRIJK VOOR ALS DE TRAJECTMAKER GOED WERKT   
 #Al is het traject hoger betekent dat er 1 loop te veel gedaan is, dus die moet eraf gehaald worden.
-if thomas.tijdsduur > 120:
-    thomas.verminderen(beste_optie)
-    thomas.pop()
-    lengte = len(thomas.traject) - 1
-    thomas.actuele_station(thomas.traject[lengte])
- 
- 
- 
- 
- 
- 
- 
- 
- 
-# While loop gaat door tot traject is kleiner of gelijk dan 120.
-while (bram.tijdsduur <= 120):
 
-    # Beste optie kiezen aan de hand van de mogelijkheden.
-    beste_optie = bram.opties(bram.eindstation[0])
-    # Trein verplaatsen naar volgend spoor.
-    bram.volgend_spoor(beste_optie[0])
-    # Huiding station updaten.
-    bram.actuele_station(beste_optie[0])
-    # Tijd updaten.
-    bram.tijd(beste_optie[1])
-
-#Al is het traject hoger betekent dat er 1 loop te veel gedaan is, dus die moet eraf gehaald worden.
-if bram.tijdsduur > 120:
-    bram.verminderen(beste_optie)
-    bram.pop()
-    lengte = len(bram.traject) - 1
-    bram.actuele_station(bram.traject[lengte]) 
-    
-
+#if thomas.tijdsduur > 120:
+  #  thomas.verminderen(beste_optie)
+    #thomas.pop()
+    #lengte = len(thomas.traject) - 1
+    #thomas.actuele_station(thomas.traject[lengte])
  
-# While loop gaat door tot traject is kleiner of gelijk dan 120.
-while (ravi.tijdsduur <= 120):
+ 
+ 
+ 
+   
 
-    # Beste optie kiezen aan de hand van de mogelijkheden.
-    beste_optie = ravi.opties(ravi.eindstation[0])
-    # Trein verplaatsen naar volgend spoor.
-    ravi.volgend_spoor(beste_optie[0])
-    # Huiding station updaten.
-    ravi.actuele_station(beste_optie[0])
-    # Tijd updaten.
-    ravi.tijd(beste_optie[1])
-
-#Al is het traject hoger betekent dat er 1 loop te veel gedaan is, dus die moet eraf gehaald worden.
-if ravi.tijdsduur > 120:
-    ravi.verminderen(beste_optie)
-    ravi.pop()
-    lengte = len(ravi.traject) - 1
-    ravi.actuele_station(ravi.traject[lengte])     
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-    
-    
-
-print
-print
-print
+print "HOLLAAAA AT ME"
 print "THOMAS: :"
 print
 print "traject: ", thomas.traject
 print "tijdsduur: ", thomas.tijdsduur
 print "Beginstation: ", thomas.beginstation
 print "Eindstation: ", thomas.eindstation
-print
-print
-print
-print "BRAM: :"
-print
-print "traject: ", bram.traject
-print "tijdsduur: ", bram.tijdsduur
-print "Beginstation: ", bram.beginstation
-print "Eindstation: ", bram.eindstation
-print
-print
-print
-print "RAVI: :"
-print
-print "traject: ", ravi.traject
-print "tijdsduur: ", ravi.tijdsduur
-print "Beginstation: ", ravi.beginstation
-print "Eindstation: ", ravi.eindstation
-
-
-
-        
-        
-        
-        
-        
-        
-    #def nieuw_station(self, nieuw_station):
-      #  self.stations.append(nieuw_station)
-        
-        
-        
-        
-        
-
-  
-
-
-  
-#mensenlijst = ['jan', 'harry']
-
-
-
-
-
-
-#volgend_station = []
-
-
-
-
-#nog_meer_mensen = ['mattia', 'paulien']
-
-
-#thomas.instappen(nog_meer_mensen)
-
-
-
-#thomas.waar_kan_ik_heen('Haarlem')
-
-#thomas.nieuw_station('Haarlem')
-
-
-#print(thomas.mensen)
-#print len(thomas.mensen)
-#print(thomas.stations)
 
