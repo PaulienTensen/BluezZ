@@ -23,6 +23,10 @@ with open('verbindingen.csv') as csvfile:
         verbindingen.append(row)
 
 
+
+
+
+
 # Prints the station and the connection with the time. 
 for i in range (b):  
    
@@ -122,7 +126,21 @@ class Trein(object):
     # Tijd bijhouden.   
     def tijd(self, tijd):
         self.tijdsduur += tijd
+    
+    def spoor_toevoegen(self, huidig_station, beste_optie):
         
+        h = huidig_station
+        b = beste_optie[0]
+        verbinding = {h:b}
+        return verbinding
+        
+        
+    def verbindingen(self, x):
+        
+        if x not in sporen:
+            sporen.append(x)
+        return sporen
+    
         
         
         
@@ -153,6 +171,8 @@ class Trein(object):
             # MISSCHIEN EEN LIST MET DAARIN DE HUIDIGE SPOOR MET DE UITEINDELIJK 
             # BESTEMMING MAKEN ZODAT WE DAT MAKKELIJK KUNNE CHECKEN
             if row[0][0] not in trajecten_algemeen:
+            
+             
                 stations_niet_aangetikt.append(row)
                
                 
@@ -164,10 +184,13 @@ class Trein(object):
                     
                     
                 else:
-                    stations_wel_aangetikt.append(row)
-                    
+              
+                
+            
+                    stations_wel_aangetikt.append(row)                                        
                     
             else:
+                                   
                     stations_wel_aangetikt.append(row)
                     
                 
@@ -195,18 +218,34 @@ class Trein(object):
         elif not stations_wel_aangetikt == []: 
             
             beste_tijd = 1000
+            
+            
             for row in stations_wel_aangetikt:
                 
+                h = huidig_station
+                b = row[0][0]
+                verbinding1 = {h:b}
+                verbinding2 = {b:h}
+                
+
+               
+                
+                if verbinding1 in sporen or verbinding2 in sporen:
+                    
+                    
+                    if int(row[1][0]) <= beste_tijd:
+                        beste_tijd = int(row[1][0])
+                        beste_station = row[0][0] 
+                    
                 
                 
                 
-                
-                if int(row[1][0]) < beste_tijd:
+                else:
                     
                     
                     beste_tijd = int(row[1][0])
                     beste_station = row [0][0]
-                    
+                    return beste_station, beste_tijd
             
             return beste_station, beste_tijd
             
@@ -235,30 +274,17 @@ class Trein(object):
         pop2 = trajecten_algemeen.pop()
         if not pop == pop2:
             trajecten_algemeen.append(pop2)
+        pop3 = sporen.pop()
         
     def verminderen(self, laatste_verbinding):
         self.tijdsduur -= laatste_verbinding[1] 
         
 
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # AUTOMATISEREN: AKA NIET ZELF NAMEN ERIN MOETEN TE DOEN!!::  
 # MISSCHIEN OP DEZE MANIER, MAAR BETER KIJKEN NAAR DE LISTS:::::::
 
 trajecten_algemeen =['Den Helder']  
+sporen = []
 
 START = ['Den Helder']       
 thomas = Trein(START, START, ['Den Helder'], 0)    
@@ -271,6 +297,11 @@ while (thomas.tijdsduur < 120):
 
     # Beste optie kiezen aan de hand van de mogelijkheden.
     beste_optie = thomas.opties(thomas.eindstation[0])
+    
+    verbinding = thomas.spoor_toevoegen(thomas.eindstation[0], beste_optie)
+    
+    gebruikte_verbindingen = thomas.verbindingen(verbinding)
+    
     # Trein verplaatsen naar volgend spoor.
     thomas.volgend_spoor(beste_optie[0])
     # Huiding station updaten.
@@ -287,14 +318,7 @@ if thomas.tijdsduur > 120:
     thomas.pop()
     lengte = len(thomas.traject) - 1
     thomas.actuele_station(thomas.traject[lengte])
- 
-# ALGEMENE POP NOG TE DOEN !!!!!! VOOR ALLE TRAJECTEN, ZIE THOMAS _ HAARLEM 
-#print "TRAJECTEN ALGEMEEN2:: ", trajecten_algemeen 
- 
- 
-
-# ALLEREERST DE UITHOEKEN KIEZEN EN ANDERS LEGE STATION
-# ALS ALLE UITHOEKEN GEKOZEN ZIJN MOET DEZE FUNCTIE BETER
+    
 d = []
 for plek in uithoeken:
     if not plek in trajecten_algemeen:
@@ -324,6 +348,11 @@ while (bram.tijdsduur < 120):
 
     # Beste optie kiezen aan de hand van de mogelijkheden.
     beste_optie = bram.opties(bram.eindstation[0])
+    
+    verbinding = bram.spoor_toevoegen(bram.eindstation[0], beste_optie)
+    
+    gebruikte_verbindingen = bram.verbindingen(verbinding)
+    
     # Trein verplaatsen naar volgend spoor.
     bram.volgend_spoor(beste_optie[0])
     # Huiding station updaten.
@@ -339,13 +368,6 @@ if bram.tijdsduur > 120:
     bram.pop()
     lengte = len(bram.traject) - 1
     bram.actuele_station(bram.traject[lengte])  
-
-
-
-
-
-
-#print "TRAJECTEN ALGEMEEN voor NU:: ", trajecten_algemeen    
 
 START = []
 for i in range (b):
@@ -376,6 +398,10 @@ while (pau.tijdsduur < 120):
     beste_optie = pau.opties(pau.eindstation[0])
     # Trein verplaatsen naar volgend spoor.
     
+    verbinding = pau.spoor_toevoegen(pau.eindstation[0], beste_optie)
+    
+    gebruikte_verbindingen = pau.verbindingen(verbinding)
+    
 
     pau.volgend_spoor(beste_optie[0])
     # Huiding station updaten.
@@ -395,7 +421,7 @@ if pau.tijdsduur > 120:
     lengte = len(pau.traject) - 1
     pau.actuele_station(pau.traject[lengte])   
     
-
+    
 
 START = []
 for i in range (b):
@@ -405,7 +431,7 @@ for i in range (b):
         x = START[0]
         trajecten_algemeen.append(x)
     elif START == []:
-        START = ['Haarlem']
+        START = ['Hoorn']
 x = START[0]
 
 
@@ -427,6 +453,10 @@ while (mat.tijdsduur < 120):
     # Beste optie kiezen aan de hand van de mogelijkheden.
     beste_optie = mat.opties(mat.eindstation[0])
     # Trein verplaatsen naar volgend spoor.
+    
+    verbinding =  mat.spoor_toevoegen(mat.eindstation[0], beste_optie)
+    
+    gebruikte_verbindingen = mat.verbindingen(verbinding)
     
     mat.volgend_spoor(beste_optie[0])
     # Huiding station updaten.
@@ -453,7 +483,7 @@ for i in range (b):
         x = START[0]
         trajecten_algemeen.append(x)
     elif START == []:
-        START = ['Rotterdam Centraal']
+        START = ['Amsterdam Sloterdijk']
 x = START[0]
 
 
@@ -466,6 +496,9 @@ while (ben.tijdsduur < 120):
     # Beste optie kiezen aan de hand van de mogelijkheden.
     beste_optie = ben.opties(ben.eindstation[0])
     # Trein verplaatsen naar volgend spoor.
+    verbinding = ben.spoor_toevoegen(ben.eindstation[0], beste_optie)
+    
+    gebruikte_verbindingen = ben.verbindingen(verbinding)
     
     ben.volgend_spoor(beste_optie[0])
     # Huiding station updaten.
@@ -481,25 +514,21 @@ if ben.tijdsduur > 120:
     ben.pop()
     lengte = len(ben.traject) - 1
     ben.actuele_station(ben.traject[lengte])   
-
-
-
-
-print 'Thomas: ', thomas.traject
-print thomas.tijdsduur
-print
-print 'Bram: ', bram.traject
-print bram.tijdsduur
+    
+    
 print 
-print 'Pau: ', pau.traject
+print 'THOMAS:: ',thomas.traject
+print thomas.tijdsduur
+
+print 'BRAM:: ',bram.traject
+print bram.tijdsduur
+print 'PAU:: ',pau.traject 
 print pau.tijdsduur
-print
-print 'Mat: ', mat.traject
+print 'MAT:: ',mat.traject
 print mat.tijdsduur
-print
-print 'Ben: ', ben.traject
+print 'BEN:: ',ben.traject
 print ben.tijdsduur
-print
-print 'Alle trajecten: ', trajecten_algemeen
-    
-    
+print 'ALLE STATIONS:: ', trajecten_algemeen
+print 
+print 'ALLE VERBINDINGEN:: ', sporen
+
