@@ -319,6 +319,9 @@ if thomas.tijdsduur > 120:
     lengte = len(thomas.traject) - 1
     thomas.actuele_station(thomas.traject[lengte])
     
+    
+    
+    
 d = []
 for plek in uithoeken:
     if not plek in trajecten_algemeen:
