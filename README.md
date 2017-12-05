@@ -16,13 +16,13 @@ constrains deel 1 - Lijnvoering voor Holland:
 1. Tijdsframe van trajecten: maximaal 2 uur. 
 2. Alle stations moeten bereden worden binnen de 2 uur. 
 3. Maximaal aantal trajecten: 7. 
-(4. Alle sporen moeten bereden worden binnen 2 uur met het maximal aantal toegestane trajecten)
+4. (Alle sporen moeten bereden worden binnen 2 uur met het maximal aantal toegestane trajecten).
 
 constrains deel 2 - Lijnvoering voor Nederland:
 1. Tijdsframe van trajecten: maximaal 3 uur. 
 2. Alle stations moeten bereden worden binnen 3 uur. 
 3. Maximaal aantal trajecten: 20. 
-(4. Alle sporen moeten bereden worden binnen 3 uur met het maximaal aantal toegestane trajecten).
+4. (Alle sporen moeten bereden worden binnen 3 uur met het maximaal aantal toegestane trajecten).
 
 ### Voorwaarden
 
