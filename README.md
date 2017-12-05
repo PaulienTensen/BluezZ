@@ -42,12 +42,13 @@ python matrix.py
 
 ### Toetsingsgrootheid
 
-De toetsingsgrootheid van deze case is het gemiddelde aantal sporen per station ^(aantal stations), in dit geval ... 
+De toetsingsgrootheid van deze case is het gemiddelde aantal sporen per station ^(aantal stations), in dit geval: 
+2,92 ^ 61 = 1,98 *(10 ^ 28). 
 
 
 ### Probleem type
 constrained optimalization problem (COP). Hierbij moet een zo goed mogelijke oplossing worden gevonden. 
-De bijbehorende toetsingsgrootheid is ************
+De bijbehorende toetsingsgrootheid is 1,98 *(10 ^ 28). 
 
 Aangepaste score functie: s = p*10000 - (t*20 + min/10).
 Orginele score functie: s = p*10000 - (t*20 + min/100000)
