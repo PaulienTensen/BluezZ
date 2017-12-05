@@ -81,7 +81,7 @@ bron: http://www.thechalkface.net/resources/Travelling_Salesman_England.pdf
 
 In deze case wordt gebruik gemaakt van een ongerichte graaf. Aangezien je heen en weer kunt tussen knopen(stations).
 Het tweede algoritme dat wordt toegepast is een 'hill climber'
-Het derde algoritme dat wordt toegepast is 'stimulated annealing'. 
+Het derde algoritme dat wordt toegepast is 'simulated annealing'. 
 
 
 
