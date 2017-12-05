@@ -1,19 +1,8 @@
-import start
-import csv
-import inladen
 import algo1
 import start
 
-def traject_maker(RANGE, MAX, STATIONS, VERBINDINGEN):
+def traject_maker(RANGE, MAX, stations, verbindingen, uithoeken, graph):
 
-    #Maken van de te gebruiken lists.
-    stations = inladen.stations(STATIONS)
-    verbindingen = inladen.verbindingen(VERBINDINGEN)
-
-    alle_sporen = inladen.alle_sporen(stations, verbindingen)
-    graph = inladen.graph(stations, alle_sporen)
-    uithoeken = inladen.uithoeken(graph, stations)
-    
     alle_trajecten = []
     trajecten_algemeen =[] 
     sporen = [] 
@@ -52,6 +41,6 @@ def traject_maker(RANGE, MAX, STATIONS, VERBINDINGEN):
         alle_trajecten.append(trein.traject)
         alle_tijdsduur.append(trein.tijdsduur)
 
-    return alle_tijdsduur, alle_trajecten, sporen
+    return alle_tijdsduur, alle_trajecten, sporen, trajecten_algemeen
 
     

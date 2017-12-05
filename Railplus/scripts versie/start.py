@@ -1,3 +1,5 @@
+from random import randint
+
 def kies_start(sporen, verbindingen, uithoeken, trajecten_algemeen, stations):
     b = len(stations)
     
@@ -30,3 +32,32 @@ def kies_start(sporen, verbindingen, uithoeken, trajecten_algemeen, stations):
    # Als alles al is geweest
     z = stations[0]['Station']
     return z
+    
+    
+def kies_start2(sporen, verbindingen, uithoeken, trajecten_algemeen, stations):
+    
+    b = len(stations)
+    
+    
+    for plek in uithoeken:
+        if not plek in trajecten_algemeen:
+            z = plek
+            trajecten_algemeen.append(z)
+            return z
+            
+    for i in range (b):
+        plek = stations[i]['Station']
+        if not plek in trajecten_algemeen:
+            z = plek
+            trajecten_algemeen.append(z)
+            return z
+
+    i = randint(0, len(stations) -1)
+    plek = stations[i]['Station']
+    z = plek
+    if not plek in trajecten_algemeen:
+        trajecten_algemeen.append(z)
+    return z
+
+    
+

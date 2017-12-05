@@ -1,12 +1,13 @@
 def score(alle_trajecten, totale_tijdsduur, sporen):
-       
-    totaal_sporen = 28
+   
+    #totaal_sporen = 22
+    totaal_sporen = 89
     t = len(alle_trajecten)
     
     gebruikte_sporen = len(sporen)
     min = totale_tijdsduur
     p = gebruikte_sporen / totaal_sporen
     
-    score = p*10000 - (t*20 + min/10) 
+    score = p*10000 - (t*20 + min/10000) 
     
     return score
