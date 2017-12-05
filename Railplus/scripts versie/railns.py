@@ -1,3 +1,5 @@
+# STAAT ALLEMAAL  NU OP NATIONAAL
+
 import csv
 import inladen
 import algo1
