@@ -74,6 +74,7 @@ s-Max = 1*10000 - (13 *20 + (1551/10)) = 9585.
 orginele formule: 
 s-Max = 1*10000 - (13*20 + (1551/100000)) = 9740. 
 
+bron: http://www.thechalkface.net/resources/Travelling_Salesman_England.pdf 
 
 ### Algoritmes
 
