@@ -49,7 +49,7 @@ De toetsingsgrootheid van deze case is het gemiddelde aantal sporen per station 
 constrained optimalization problem (COP). Hierbij moet een zo goed mogelijke oplossing worden gevonden. 
 De bijbehorende toetsingsgrootheid is ************
 
-Aangepaste score functie: s = p*10000 - (t*20 + min/10)
+Aangepaste score functie: s = p*10000 - (t*20 + min/10).
 Orginele score functie: s = p*10000 - (t*20 + min/100000)
 
 #### Grootte statespace: 
