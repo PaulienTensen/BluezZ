@@ -12,6 +12,10 @@ De volgende score functie werd meegegeven bij de case voor de kwaliteit van de l
 s = p*10000 - (t*20 + min/100000)
 Waarin S de score is, p het percentage van de bereden kritieke verbindingen, t het aantal treinen en m het totaal door alle treinen samen gereden aantal minuten in de lijnvoering. 
 
+Aangepaste score functie: 
+s = p*10000 - (t*20 + min/10)
+Deze scorefunctie is veranderd in overleg met Daan. De factor 100000 is veranderd naar 10, zodat het aantal minuten een relevanteere rol krijgt in deze formule. De weging van de twee variabelen `min` en `t`zijn nu ongeveer van dezelfde orde. Wij denken dat dat belangrijk is, omdat de trajecttijd ook indiceert of het een goed traject is of niet.
+
 constrains deel 1 - Lijnvoering voor Holland:
 1. Tijdsframe van trajecten: maximaal 2 uur. 
 2. Alle stations moeten bereden worden binnen de 2 uur. 
@@ -30,7 +34,7 @@ Zorg dat de bijbehorende csv bestanden: ConnectiesHolland.csv, StationsHolland.c
 
 ### Installeren
 
-Deze case is gemaakt met behulp van Python 3.6
+Deze case is gemaakt met behulp van Python 3.6.
 
 #### Runnen:
 python graaf.py
@@ -38,19 +42,37 @@ python matrix.py
 
 ### Toetsingsgrootheid
 
-De toetsingsgrootheid van deze case is het gemiddelde aantal sporen per station ^(aantal stations).
+De toetsingsgrootheid van deze case is het gemiddelde aantal sporen per station ^(aantal stations), in dit geval ... 
 
 
 ### Probleem type
 constrained optimalization problem (COP). Hierbij moet een zo goed mogelijke oplossing worden gevonden. 
 De bijbehorende toetsingsgrootheid is ************
 
-Grootte statespace: 
-upperbound: slechtste oplossing (nearest neighbour algoritme): uitrekenen wat de totale traject lengte is. 
-aantal minuten / 120 
+Aangepaste score functie: s = p*10000 - (t*20 + min/10)
+Orginele score functie: s = p*10000 - (t*20 + min/100000)
 
-Lowerbound: de hoogste score die we kunnen krijgen.
+#### Grootte statespace: 
+#### upperbound: 
+Uitkomsten van ons nearest neigbour algoritme.
 
+aangepaste formule: 
+S-Min = 24/28 * 10000 - ((5*20) + (566/10) = 8414 
+
+orginele formule:
+S-Min = 24/28 * 10000 - ((5*20) + (566/100000) = 8471 
+
+
+
+
+#### Lowerbound: Hoogst mogelijke score berekend met de score-functie waarbij alle trajecten en stations worden bereden.
+
+min = 1551
+t = 1551/120 = 13
+s-Max = 1*10000 - (13 *20 + (1551/10)) = 9585.  
+
+orginele formule: 
+s-Max = 1*10000 - (13*20 + (1551/100000)) = 9740. 
 
 
 ### Algoritmes
