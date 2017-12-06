@@ -69,11 +69,11 @@ S-Min = 24/28 * 10000 - ((5*20) + (566/100000) = 8471
 #### Lowerbound: Hoogst mogelijke score berekend met de score-functie waarbij alle trajecten en stations worden bereden.
 
 min = 1551
-t = 1551/120 = 13
-s-Max = 1*10000 - (13 *20 + (1551/10)) = 9585.  
+t = 1551/180 = 9
+s-Max = 1*10000 - (9 *20 + (1551/10)) = 9665.  
 
 orginele formule: 
-s-Max = 1*10000 - (13*20 + (1551/100000)) = 9740. 
+s-Max = 1*10000 - (9*20 + (1551/100000)) = 9820. 
 
 bron: http://www.thechalkface.net/resources/Travelling_Salesman_England.pdf 
 
